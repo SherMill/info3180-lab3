@@ -20,6 +20,21 @@
     <header>
         {% include "header.html" %}
     </header>
+
+    <!-- Flash Messages -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <main>
         <div class="container">
             {% block main %}{% endblock %}
@@ -29,10 +44,9 @@
         <div class="container">
             {% include "footer.html" %}
         </div>
-    </footer>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-    {% block js %} {% endblock%}
+    </footer> 
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+      {% block js %} {% endblock%}
   </body>
 </html>
